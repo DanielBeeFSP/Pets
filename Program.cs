@@ -267,7 +267,48 @@ do
             readResult = Console.ReadLine();
             break;
         case "4":
-            Console.WriteLine("this app feature is comingsoon - please check back to see progress.");
+            for (int x = 0; x < maxPets; x++)
+            {
+                if (ourAnimals[x, 0] == "ID #: ")
+                {
+                    continue;
+                }
+
+                Console.WriteLine($"\nID: {ourAnimals[x, 0]}");
+
+                for (int i = 0; i < ourAnimals.GetLength(1); i++)
+                {
+                    if (ourAnimals[x, i] == null || ourAnimals[x, i] == "tbd")
+                    {
+                        Console.WriteLine("There are some values missing, please fill them out.");
+                    }
+
+                    // nickname = 3
+                    if (string.IsNullOrWhiteSpace(ourAnimals[x, 3]))
+                    {
+                        Console.WriteLine("Please enter a pet nickname:");
+                        ourAnimals[x, 3] = Console.ReadLine()?.Trim() ?? "";
+                        while (string.IsNullOrWhiteSpace(ourAnimals[x, 3]))
+                        {
+                            Console.WriteLine("Please enter a pet nickname:");
+                            ourAnimals[x, 3] = Console.ReadLine()?.Trim() ?? "";
+                        }
+                    }
+
+                    // personality description = 5
+                    if (string.IsNullOrWhiteSpace(ourAnimals[x, 5]))
+                    {
+                        Console.WriteLine("Please enter a pet personality description:");
+                        ourAnimals[x, 5] = Console.ReadLine()?.Trim() ?? "";
+                        while (string.IsNullOrWhiteSpace(ourAnimals[x, 5]))
+                        {
+                            Console.WriteLine("Please enter a pet personality description:");
+                            ourAnimals[x, 5] = Console.ReadLine()?.Trim() ?? "";
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("All pet nickname and personality descriptions are complete.");
             Console.WriteLine("Press the Enter key to continue.");
             readResult = Console.ReadLine();
             break;
